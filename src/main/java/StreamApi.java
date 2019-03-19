@@ -2,6 +2,7 @@ package main.java;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StreamApi {
 	public static void main(String args[]) {
@@ -17,6 +18,17 @@ public class StreamApi {
 		productList.add(p1);
 		productList.add(p2);
 		
+		List<Double> priceList = new ArrayList<>();
+		
+		priceList = productList.stream()
+				.filter(p-> p.getPrice() > 50000)
+				.map(p -> p.getPrice())
+				.collect(Collectors.toList());
+		
+		System.out.println(priceList);
+		
+		//filter - intermediate operation
+		//foreach - terminal operation
 		productList.stream()
 		.filter(p-> p.getPrice() > 50000)
 		.forEach(p->System.out.println(p.getBrand() + " - " + p.getPrice()));
